@@ -1,0 +1,20 @@
+# Researcher-style lint: compact one-liners and short math names are fine; imports sorted at top, no dead code, no shadowed builtins.
+line-length = 170
+target-version = "py311"
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP", "C4", "SIM", "A", "N", "PL"]
+ignore = [
+  "E701", "E702", "E731", "E741",                 # one-line if/;/lambda assignment, single-letter names (l, I)
+  "N802", "N803", "N806", "N812", "N816",          # math-style names: X, Y, B, W, T, F
+  "SIM108", "SIM102", "SIM117", "SIM118",          # nested/ternary style preferences
+  "PLR0912", "PLR0913", "PLR0915", "PLR2004", "PLR0911", "PLC0415", "PLW2901", "PLW0603",  # size/magic-number/lazy-import heuristics
+  "B905", "B023", "SIM905", "PLR0917",  # str.split() word lists, positional-arg counts                                  # zip strict, loop-var closure in tiny lambdas
+]
+[lint.per-file-ignores]
+"report_data.py" = ["E501"]
+"report_figs.py" = ["E501"]                         # long LaTeX string templates
+"interp_viz.py" = ["E501"]
+"interp_stats.py" = ["E501"]
+"interp_agg.py" = ["E501"]
+"test_all.py" = ["E402"]                           # env vars must be set before project imports
